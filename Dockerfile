@@ -2,10 +2,12 @@
 FROM maven:3.9.9-eclipse-temurin-17 AS build
 WORKDIR /app
 
-COPY pom.xml .
+# Copy pom.xml from inner project folder
+COPY studentManagement/pom.xml ./pom.xml
 RUN mvn dependency:go-offline
 
-COPY src ./src
+# Copy source code
+COPY studentManagement/src ./src
 RUN mvn clean package -DskipTests
 
 # ---------- RUN STAGE ----------
