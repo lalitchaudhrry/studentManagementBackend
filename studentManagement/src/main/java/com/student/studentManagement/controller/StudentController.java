@@ -7,10 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @RestController
 @RequestMapping("/api/students")
-
 public class StudentController {
 
     private final StudentService studentService;
@@ -32,16 +30,17 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getAllStudents());
     }
 
-    // 3️⃣ Get Student by Admission No
-    @GetMapping("/{admissionNo}")
-    public ResponseEntity<Student> getStudentByAdmissionNo(@PathVariable String admissionNo) {
+    // 3️⃣ Get Student by Admission No (EXPLICIT PATH)
+    @GetMapping("/admission/{admissionNo}")
+    public ResponseEntity<Student> getStudentByAdmissionNo(
+            @PathVariable String admissionNo) {
         return ResponseEntity.ok(
                 studentService.getStudentByAdmissionNo(admissionNo)
         );
     }
 
-    // 4️⃣ Delete Student by ID
-    @DeleteMapping("/{id}")
+    // 4️⃣ Delete Student by ID (EXPLICIT PATH)
+    @DeleteMapping("/id/{id}")
     public ResponseEntity<String> deleteStudent(@PathVariable Long id) {
         studentService.deleteStudentById(id);
         return ResponseEntity.ok("Student deleted successfully");
